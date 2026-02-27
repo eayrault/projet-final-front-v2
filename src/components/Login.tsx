@@ -23,17 +23,30 @@ export default function Login() {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}>
+    <div style={{ maxWidth: "400px", margin: "0 auto", padding: "20px" }}>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+      >
         {error && (
-          <div style={{ color: 'red', padding: '10px', backgroundColor: '#ffebee', borderRadius: '4px' }}>
+          <div
+            style={{
+              color: "red",
+              padding: "10px",
+              backgroundColor: "#ffebee",
+              borderRadius: "4px",
+            }}
+          >
             {error}
           </div>
         )}
-        
+
         <div>
-          <label htmlFor="email" style={{ display: 'block', marginBottom: '5px' }}>
+          <label
+            htmlFor="email"
+            style={{ display: "block", marginBottom: "5px" }}
+          >
             Email:
           </label>
           <input
@@ -43,17 +56,20 @@ export default function Login() {
             onChange={(e) => setEmail(e.target.value)}
             required
             style={{
-              width: '100%',
-              padding: '8px',
-              fontSize: '16px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
+              width: "100%",
+              padding: "8px",
+              fontSize: "16px",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
             }}
           />
         </div>
 
         <div>
-          <label htmlFor="password" style={{ display: 'block', marginBottom: '5px' }}>
+          <label
+            htmlFor="password"
+            style={{ display: "block", marginBottom: "5px" }}
+          >
             Password:
           </label>
           <input
@@ -63,11 +79,11 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             required
             style={{
-              width: '100%',
-              padding: '8px',
-              fontSize: '16px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
+              width: "100%",
+              padding: "8px",
+              fontSize: "16px",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
             }}
           />
         </div>
@@ -75,18 +91,11 @@ export default function Login() {
         <button
           type="submit"
           disabled={loading}
-          style={{
-            padding: '10px',
-            fontSize: '16px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: loading ? 'not-allowed' : 'pointer',
-            opacity: loading ? 0.6 : 1,
-          }}
+          className={`w-full py-2 px-4 text-white bg-blue-600 rounded cursor-pointer hover:bg-blue-700 ${
+            loading ? "opacity-60 cursor-not-allowed" : ""
+          }`}
         >
-          {loading ? 'Logging in...' : 'Login'}
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>

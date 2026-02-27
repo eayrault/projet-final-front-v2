@@ -44,24 +44,29 @@ export default function Register() {
     }
   };
 
+  const inputClass =
+    "w-full px-3 py-2 text-base rounded border border-gray-400 bg-zinc-800 text-white focus:outline-none focus:border-indigo-500";
+  const labelClass = "block mb-1 text-sm text-gray-300";
+
   return (
-    <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+    <div className="max-w-md mx-auto px-5 py-6">
+      <h2 className="text-2xl font-bold text-white mb-6">Register</h2>
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {error && (
-          <div style={{ color: 'red', padding: '10px', backgroundColor: '#ffebee', borderRadius: '4px' }}>
+          <div className="text-red-400 px-4 py-2 bg-red-950 border border-red-500 rounded">
             {error}
           </div>
         )}
-        
+
         {success && (
-          <div style={{ color: 'green', padding: '10px', backgroundColor: '#e8f5e9', borderRadius: '4px' }}>
+          <div className="text-green-400 px-4 py-2 bg-green-950 border border-green-500 rounded">
             Registration successful! You can now login.
           </div>
         )}
 
         <div>
-          <label htmlFor="username" style={{ display: 'block', marginBottom: '5px' }}>
+          <label htmlFor="username" className={labelClass}>
             Username:
           </label>
           <input
@@ -71,18 +76,12 @@ export default function Register() {
             value={formData.username}
             onChange={handleChange}
             required
-            style={{
-              width: '100%',
-              padding: '8px',
-              fontSize: '16px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
-            }}
+            className={inputClass}
           />
         </div>
 
         <div>
-          <label htmlFor="first_name" style={{ display: 'block', marginBottom: '5px' }}>
+          <label htmlFor="first_name" className={labelClass}>
             First Name:
           </label>
           <input
@@ -92,18 +91,12 @@ export default function Register() {
             value={formData.first_name}
             onChange={handleChange}
             required
-            style={{
-              width: '100%',
-              padding: '8px',
-              fontSize: '16px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
-            }}
+            className={inputClass}
           />
         </div>
 
         <div>
-          <label htmlFor="last_name" style={{ display: 'block', marginBottom: '5px' }}>
+          <label htmlFor="last_name" className={labelClass}>
             Last Name:
           </label>
           <input
@@ -113,18 +106,12 @@ export default function Register() {
             value={formData.last_name}
             onChange={handleChange}
             required
-            style={{
-              width: '100%',
-              padding: '8px',
-              fontSize: '16px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
-            }}
+            className={inputClass}
           />
         </div>
 
         <div>
-          <label htmlFor="email" style={{ display: 'block', marginBottom: '5px' }}>
+          <label htmlFor="email" className={labelClass}>
             Email:
           </label>
           <input
@@ -134,18 +121,12 @@ export default function Register() {
             value={formData.email}
             onChange={handleChange}
             required
-            style={{
-              width: '100%',
-              padding: '8px',
-              fontSize: '16px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
-            }}
+            className={inputClass}
           />
         </div>
 
         <div>
-          <label htmlFor="password" style={{ display: 'block', marginBottom: '5px' }}>
+          <label htmlFor="password" className={labelClass}>
             Password:
           </label>
           <input
@@ -155,31 +136,18 @@ export default function Register() {
             value={formData.password}
             onChange={handleChange}
             required
-            style={{
-              width: '100%',
-              padding: '8px',
-              fontSize: '16px',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
-            }}
+            className={inputClass}
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          style={{
-            padding: '10px',
-            fontSize: '16px',
-            backgroundColor: '#28a745',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: loading ? 'not-allowed' : 'pointer',
-            opacity: loading ? 0.6 : 1,
-          }}
+          className={`w-full py-2 px-4 text-white bg-green-600 rounded hover:bg-green-700 transition-colors ${
+            loading ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
+          }`}
         >
-          {loading ? 'Registering...' : 'Register'}
+          {loading ? "Registering..." : "Register"}
         </button>
       </form>
     </div>
