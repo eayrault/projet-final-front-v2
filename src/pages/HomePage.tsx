@@ -13,33 +13,14 @@ function HomePage() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#1a1a1a" }}>
+    <div className="min-h-screen bg-[#1a1a1a]">
       {/* Header/Navbar */}
-      <header
-        style={{
-          backgroundColor: "#2d2d2d",
-          padding: "1rem 2rem",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <h1 style={{ margin: 0, color: "#646cff", fontSize: "1.5rem" }}>
-          LOCKED
-        </h1>
-        <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+      <header className="bg-[#2d2d2d] px-8 py-4 shadow-md flex justify-between items-center">
+        <h1 className="m-0 text-[#646cff] text-2xl">LOCKED</h1>
+        <div className="flex gap-4 items-center">
           <button
             onClick={handleLogout}
-            style={{
-              padding: "0.5rem 1rem",
-              fontSize: "14px",
-              backgroundColor: "#dc3545",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
+            className="py-2 px-4 text-sm bg-red-600 text-white border-none rounded cursor-pointer hover:bg-red-700 transition-colors"
           >
             Logout
           </button>
@@ -47,89 +28,24 @@ function HomePage() {
       </header>
 
       {/* Main Content */}
-      <main
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "3rem 2rem",
-        }}
-      >
+      <main className="max-w-6xl mx-auto px-8 py-12">
         {/* Welcome Section */}
-        <section style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <h2 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
-            Welcome !
-          </h2>
+        <section className="text-center mb-12">
+          <h2 className="text-4xl mb-4">Welcome !</h2>
         </section>
 
         {/* Navigation Cards */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "2rem",
-            marginTop: "2rem",
-          }}
-        >
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 mt-8">
           {/* Events Card */}
-          <Link
-            to="/events"
-            style={{
-              textDecoration: "none",
-              color: "inherit",
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: "#2d2d2d",
-                padding: "2rem",
-                borderRadius: "12px",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                cursor: "pointer",
-                border: "2px solid transparent",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-5px)";
-                e.currentTarget.style.boxShadow =
-                  "0 8px 20px rgba(100, 108, 255, 0.3)";
-                e.currentTarget.style.borderColor = "#646cff";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
-                e.currentTarget.style.borderColor = "transparent";
-              }}
-            >
-              <h3
-                style={{
-                  fontSize: "1.5rem",
-                  marginBottom: "0.5rem",
-                  color: "#646cff",
-                  textAlign: "center",
-                }}
-              >
+          <Link to="/events" className="no-underline text-inherit">
+            <div className="bg-[#2d2d2d] p-8 rounded-xl shadow-lg transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-[#646cff] hover:-translate-y-1">
+              <h3 className="text-2xl mb-2 text-[#646cff] text-center">
                 Events
               </h3>
-              <p
-                style={{
-                  color: "#888",
-                  textAlign: "center",
-                  lineHeight: "1.6",
-                }}
-              >
+              <p className="text-[#888] text-center leading-relaxed">
                 Browse and join upcoming gaming events in your area
               </p>
-              <div
-                style={{
-                  marginTop: "1.5rem",
-                  padding: "0.75rem",
-                  backgroundColor: "#1a1a1a",
-                  borderRadius: "8px",
-                  textAlign: "center",
-                  fontSize: "0.9rem",
-                  color: "#aaa",
-                }}
-              >
+              <div className="mt-6 p-3 bg-[#1a1a1a] rounded-lg text-center text-sm text-[#aaa]">
                 GO
               </div>
             </div>

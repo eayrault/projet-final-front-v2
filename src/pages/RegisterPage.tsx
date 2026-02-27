@@ -3,17 +3,11 @@ import Register from "../components/Register";
 
 function RegisterPage() {
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div className="text-center p-5">
       <Register />
-      <p style={{ marginTop: "20px" }}>
+      <p className="mt-5">
         Already have an account?{" "}
-        <Link
-          to="/login"
-          style={{
-            color: "#007bff",
-            textDecoration: "underline",
-          }}
-        >
+        <Link to="/login" className="text-[#007bff] underline">
           Login
         </Link>
       </p>
