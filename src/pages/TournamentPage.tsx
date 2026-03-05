@@ -6,3 +6,4 @@ function TournamentPage() {
   );
 }
 export default TournamentPage;
+// prochaine séance implémenté la feature

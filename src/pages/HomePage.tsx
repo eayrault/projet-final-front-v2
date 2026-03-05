@@ -14,7 +14,6 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#1a1a1a]">
-      {/* Header/Navbar */}
       <header className="bg-[#2d2d2d] px-8 py-4 shadow-md flex justify-between items-center">
         <h1 className="m-0 text-[#646cff] text-2xl">LOCKED</h1>
         <div className="flex gap-4 items-center">
@@ -27,16 +26,12 @@ function HomePage() {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="max-w-6xl mx-auto px-8 py-12">
-        {/* Welcome Section */}
         <section className="text-center mb-12">
           <h2 className="text-4xl mb-4">Welcome !</h2>
         </section>
 
-        {/* Navigation Cards */}
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 mt-8">
-          {/* Events Card */}
           <Link to="/events" className="no-underline text-inherit">
             <div className="bg-[#2d2d2d] p-8 rounded-xl shadow-lg transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-[#646cff] hover:-translate-y-1">
               <h3 className="text-2xl mb-2 text-[#646cff] text-center">
