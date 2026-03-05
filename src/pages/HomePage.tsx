@@ -45,6 +45,19 @@ function HomePage() {
               </div>
             </div>
           </Link>
+          <Link to="/my-events" className="no-underline text-inherit">
+            <div className="bg-[#2d2d2d] p-8 rounded-xl shadow-lg transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-[#646cff] hover:-translate-y-1">
+              <h3 className="text-2xl mb-2 text-[#646cff] text-center">
+                My Events
+              </h3>
+              <p className="text-[#888] text-center leading-relaxed">
+                View and manage your event registrations
+              </p>
+              <div className="mt-6 p-3 bg-[#1a1a1a] rounded-lg text-center text-sm text-[#aaa]">
+                GO
+              </div>
+            </div>
+          </Link>
         </div>
       </main>
     </div>

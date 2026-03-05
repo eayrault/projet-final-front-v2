@@ -23,96 +23,204 @@ interface RegisterResponse {
   email: string;
 }
 
+export interface EventResponse {
+  id: string;
+  name: string;
+  description: string | null;
+  attendees: number;
+  start_date: string;
+  end_date: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface MyEventRegistration {
+  id: string;
+  user_id: string;
+  event_id: string;
+  registered_at: string;
+  event_name: string;
+  event_description: string | null;
+  event_start_date: string;
+  username: string;
+}
+
 export async function register(data: RegisterData): Promise<RegisterResponse> {
   const response = await fetch(`${API_BASE_URL}/auth/register`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.message || 'Registration failed');
+    throw new Error(error.message || "Registration failed");
   }
 
   return response.json();
 }
 
-export async function login(credentials: LoginCredentials): Promise<AuthResponse> {
+export async function login(
+  credentials: LoginCredentials,
+): Promise<AuthResponse> {
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(credentials),
   });
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.message || 'Login failed');
+    throw new Error(error.message || "Login failed");
   }
 
   const data = await response.json();
-  
+
   return data;
 }
 
 export async function logout(): Promise<void> {
-  const refreshToken = localStorage.getItem('refreshToken');
-  
+  const refreshToken = localStorage.getItem("refreshToken");
+
   if (!refreshToken) {
     return;
   }
 
   try {
     await fetch(`${API_BASE_URL}/auth/logout`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ refreshToken }),
     });
   } finally {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
   }
 }
 
 export async function refreshAccessToken(): Promise<AuthResponse> {
-  const refreshToken = localStorage.getItem('refreshToken');
-  
+  const refreshToken = localStorage.getItem("refreshToken");
+
   if (!refreshToken) {
-    throw new Error('No refresh token available');
+    throw new Error("No refresh token available");
   }
 
   const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ refreshToken }),
   });
 
   if (!response.ok) {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    throw new Error('Token refresh failed');
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    throw new Error("Token refresh failed");
   }
 
   const data = await response.json();
-  
-  localStorage.setItem('accessToken', data.accessToken);
-  localStorage.setItem('refreshToken', data.refreshToken);
-  
+
+  localStorage.setItem("accessToken", data.accessToken);
+  localStorage.setItem("refreshToken", data.refreshToken);
+
   return data;
 }
 
 export function getAccessToken(): string | null {
-  return localStorage.getItem('accessToken');
+  return localStorage.getItem("accessToken");
 }
 
 export function isAuthenticated(): boolean {
-  return !!localStorage.getItem('accessToken');
+  return !!localStorage.getItem("accessToken");
+}
+
+export async function getEvents(): Promise<EventResponse[]> {
+  const response = await fetch(`${API_BASE_URL}/events`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch events");
+  }
+
+  return response.json();
+}
+
+export async function getEvent(id: string): Promise<EventResponse> {
+  const response = await fetch(`${API_BASE_URL}/events/${id}`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Event not found");
+  }
+
+  return response.json();
+}
+
+export async function registerToEvent(eventId: string): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/event-registrations`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ event_id: eventId }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Registration failed");
+  }
+}
+
+export async function unregisterFromEvent(eventId: string): Promise<void> {
+  const response = await fetch(
+    `${API_BASE_URL}/event-registrations/${eventId}`,
+    {
+      method: "DELETE",
+      credentials: "include",
+    },
+  );
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Unregistration failed");
+  }
+}
+
+export async function checkRegistration(eventId: string): Promise<boolean> {
+  const response = await fetch(
+    `${API_BASE_URL}/event-registrations/check/${eventId}`,
+    {
+      credentials: "include",
+    },
+  );
+
+  if (!response.ok) {
+    return false;
+  }
+
+  const data = await response.json();
+  return data.isRegistered;
+}
+
+export async function getMyEvents(): Promise<MyEventRegistration[]> {
+  const response = await fetch(
+    `${API_BASE_URL}/event-registrations/my-events`,
+    {
+      credentials: "include",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch registrations");
+  }
+
+  return response.json();
 }

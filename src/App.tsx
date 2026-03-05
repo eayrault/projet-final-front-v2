@@ -5,7 +5,9 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import EventPage from "./pages/EventPage";
+import EventDetailPage from "./pages/EventDetailPage";
 import TournamentPage from "./pages/TournamentPage";
+import MyEventsPage from "./pages/MyEventsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -40,10 +42,26 @@ function App() {
         }
       />
       <Route
+        path="/events/:id"
+        element={
+          <ProtectedRoute>
+            <EventDetailPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/tournaments"
         element={
           <ProtectedRoute>
             <TournamentPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/my-events"
+        element={
+          <ProtectedRoute>
+            <MyEventsPage />
           </ProtectedRoute>
         }
       />
