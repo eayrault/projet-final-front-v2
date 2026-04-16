@@ -71,7 +71,10 @@ function EventDetailPage() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-8">
-      <Link to="/events" className="text-[#646cff] hover:text-[#535bf2] text-sm">
+      <Link
+        to="/events"
+        className="text-[#646cff] hover:text-[#535bf2] text-sm"
+      >
         ← Back to events
       </Link>
 
@@ -97,12 +100,23 @@ function EventDetailPage() {
           </div>
         </div>
 
+        <div>
+          <Link
+            to="/tournaments"
+            className="text-[#646cff] hover:text-[#535bf2] text-sm"
+          >
+            View tournaments
+          </Link>
+        </div>
+
         {message && <p className="text-green-400 mb-3">{message}</p>}
         {error && <p className="text-red-400 mb-3">{error}</p>}
 
         {isRegistered ? (
           <div>
-            <p className="text-green-400 mb-3">✓ You are registered for this event</p>
+            <p className="text-green-400 mb-3">
+              ✓ You are registered for this event
+            </p>
             <button
               onClick={handleUnregister}
               disabled={actionLoading}

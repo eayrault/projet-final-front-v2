@@ -8,6 +8,7 @@ import EventPage from "./pages/EventPage";
 import EventDetailPage from "./pages/EventDetailPage";
 import TournamentPage from "./pages/TournamentPage";
 import MyEventsPage from "./pages/MyEventsPage";
+import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -62,6 +63,14 @@ function App() {
         element={
           <ProtectedRoute>
             <MyEventsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <ProfilePage />
           </ProtectedRoute>
         }
       />

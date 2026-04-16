@@ -45,6 +45,17 @@ export interface MyEventRegistration {
   username: string;
 }
 
+export interface UserProfile {
+  id: string;
+  username: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  role: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export async function register(data: RegisterData): Promise<RegisterResponse> {
   const response = await fetch(`${API_BASE_URL}/auth/register`, {
     method: "POST",
@@ -63,7 +74,7 @@ export async function register(data: RegisterData): Promise<RegisterResponse> {
 }
 
 export async function login(
-  credentials: LoginCredentials,
+  credentials: LoginCredentials
 ): Promise<AuthResponse> {
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",
@@ -139,6 +150,20 @@ export function getAccessToken(): string | null {
 
 export function isAuthenticated(): boolean {
   return !!localStorage.getItem("accessToken");
+}
+
+export async function getMe(): Promise<UserProfile> {
+  const accessToken = localStorage.getItem("accessToken");
+
+  const response = await fetch(`${API_BASE_URL}/user/me`, {
+    headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch profile");
+  }
+
+  return response.json();
 }
 
 export async function getEvents(): Promise<EventResponse[]> {

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import NavCard from "../components/NavCard";
 
@@ -17,6 +18,13 @@ function HomePage() {
       <header className="bg-[#2d2d2d] px-8 py-4 shadow-md flex justify-between items-center">
         <h1 className="m-0 text-[#646cff] text-2xl">LOCKED</h1>
         <div className="flex gap-4 items-center">
+          <Link
+            to="/profile"
+            className="w-9 h-9 flex items-center justify-center text-white font-bold text-base transition-colors select-none"
+            title="My profile"
+          >
+            My profile
+          </Link>
           <button
             onClick={handleLogout}
             className="py-2 px-4 text-sm bg-red-600 text-white border-none rounded cursor-pointer hover:bg-red-700 transition-colors"
