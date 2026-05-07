@@ -91,6 +91,13 @@ export async function login(
 
   const data = await response.json();
 
+  if (data.accessToken) {
+    localStorage.setItem("accessToken", data.accessToken);
+  }
+  if (data.refreshToken) {
+    localStorage.setItem("refreshToken", data.refreshToken);
+  }
+
   return data;
 }
 
@@ -152,12 +159,36 @@ export function isAuthenticated(): boolean {
   return !!localStorage.getItem("accessToken");
 }
 
-export async function getMe(): Promise<UserProfile> {
-  const accessToken = localStorage.getItem("accessToken");
+async function tryRefreshToken(): Promise<boolean> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
+      method: "POST",
+      credentials: "include",
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
 
-  const response = await fetch(`${API_BASE_URL}/user/me`, {
-    headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
-  });
+async function fetchWithAuth(
+  input: RequestInfo,
+  init?: RequestInit
+): Promise<Response> {
+  const response = await fetch(input, { ...init, credentials: "include" });
+
+  if (response.status === 401) {
+    const refreshed = await tryRefreshToken();
+    if (refreshed) {
+      return fetch(input, { ...init, credentials: "include" });
+    }
+  }
+
+  return response;
+}
+
+export async function getMe(): Promise<UserProfile> {
+  const response = await fetchWithAuth(`${API_BASE_URL}/user/me`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch profile");

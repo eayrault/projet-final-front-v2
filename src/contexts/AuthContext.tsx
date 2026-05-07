@@ -3,13 +3,13 @@ import {
   login as apiLogin,
   logout as apiLogout,
   register as apiRegister,
-  isAuthenticated,
   getMe,
   type UserProfile,
 } from "../services/api";
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  isLoading: boolean;
   user: UserProfile | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -29,14 +29,19 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [user, setUser] = useState<UserProfile | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (isAuthenticated()) {
-      setAuthenticated(true);
-      getMe()
-        .then(setUser)
-        .catch(() => setUser(null));
-    }
+    getMe()
+      .then((me) => {
+        setAuthenticated(true);
+        setUser(me);
+      })
+      .catch(() => {
+        setAuthenticated(false);
+        setUser(null);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const login = async (email: string, password: string) => {
@@ -58,7 +63,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated: authenticated, user, login, logout, register }}
+      value={{
+        isAuthenticated: authenticated,
+        isLoading,
+        user,
+        login,
+        logout,
+        register,
+      }}
     >
       {children}
     </AuthContext.Provider>
