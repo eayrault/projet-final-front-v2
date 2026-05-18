@@ -9,6 +9,7 @@ import EventDetailPage from "./pages/EventDetailPage";
 import TournamentPage from "./pages/TournamentPage";
 import MyEventsPage from "./pages/MyEventsPage";
 import ProfilePage from "./pages/ProfilePage";
+import CreateEventPage from "./pages/CreateEventPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -47,6 +48,14 @@ function App() {
         element={
           <ProtectedRoute>
             <EventPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/events/create"
+        element={
+          <ProtectedRoute>
+            <CreateEventPage />
           </ProtectedRoute>
         }
       />

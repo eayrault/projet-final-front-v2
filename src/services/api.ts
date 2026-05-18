@@ -266,6 +266,35 @@ export async function checkRegistration(eventId: string): Promise<boolean> {
   return data.isRegistered;
 }
 
+export interface EventCreateData {
+  name: string;
+  description?: string;
+  start_date: string;
+  end_date: string;
+}
+
+export async function createEvent(
+  data: EventCreateData
+): Promise<EventResponse> {
+  const token = localStorage.getItem("accessToken");
+  const response = await fetch(`${API_BASE_URL}/events`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Failed to create event");
+  }
+
+  return response.json();
+}
+
 export async function getMyEvents(): Promise<MyEventRegistration[]> {
   const response = await fetch(
     `${API_BASE_URL}/event-registrations/my-events`,

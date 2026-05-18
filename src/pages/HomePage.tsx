@@ -46,6 +46,11 @@ function HomePage() {
             description="Browse and join upcoming gaming events in your area"
           />
           <NavCard
+            to="/events/create"
+            title="Create an Event"
+            description="Organize a new gaming event and manage its tournaments"
+          />
+          <NavCard
             to="/my-events"
             title="My Events"
             description="View and manage your event registrations"
