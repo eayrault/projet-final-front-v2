@@ -28,6 +28,7 @@ export interface EventResponse {
   name: string;
   description: string | null;
   attendees: number;
+  created_by: string | null;
   start_date: string;
   end_date: string;
   created_at: string;
@@ -241,7 +242,7 @@ export async function unregisterFromEvent(eventId: string): Promise<void> {
     {
       method: "DELETE",
       credentials: "include",
-    },
+    }
   );
 
   if (!response.ok) {
@@ -255,7 +256,7 @@ export async function checkRegistration(eventId: string): Promise<boolean> {
     `${API_BASE_URL}/event-registrations/check/${eventId}`,
     {
       credentials: "include",
-    },
+    }
   );
 
   if (!response.ok) {
@@ -300,11 +301,23 @@ export async function getMyEvents(): Promise<MyEventRegistration[]> {
     `${API_BASE_URL}/event-registrations/my-events`,
     {
       credentials: "include",
-    },
+    }
   );
 
   if (!response.ok) {
     throw new Error("Failed to fetch registrations");
+  }
+
+  return response.json();
+}
+
+export async function getMyCreatedEvents(): Promise<EventResponse[]> {
+  const response = await fetch(`${API_BASE_URL}/events/my-events`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch your created events");
   }
 
   return response.json();

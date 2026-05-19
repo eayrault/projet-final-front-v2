@@ -10,94 +10,62 @@ export default function Login() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
 
     try {
       await login(email, password);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      setError(err instanceof Error ? err.message : "Login failed");
     } finally {
       setLoading(false);
     }
   };
-
   return (
-    <div style={{ maxWidth: "400px", margin: "0 auto", padding: "20px" }}>
-      <h2>Login</h2>
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      {error && (
+        <div className="bg-red-900/40 border border-red-500 text-red-300 rounded-lg px-4 py-3 text-sm">
+          {error}
+        </div>
+      )}
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="email" className="text-sm text-[#aaa] font-medium">
+          Email
+        </label>
+        <input
+          id="email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          placeholder="you@example.com"
+          className="bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-[#555] focus:outline-none focus:border-[#646cff] transition-colors"
+        />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="password" className="text-sm text-[#aaa] font-medium">
+          Password
+        </label>
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          placeholder="••••••••"
+          className="bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-[#555] focus:outline-none focus:border-[#646cff] transition-colors"
+        />
+      </div>
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full py-3 px-4 bg-[#646cff] text-white font-semibold rounded-lg hover:bg-[#535bf2] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {error && (
-          <div
-            style={{
-              color: "red",
-              padding: "10px",
-              backgroundColor: "#ffebee",
-              borderRadius: "4px",
-            }}
-          >
-            {error}
-          </div>
-        )}
-
-        <div>
-          <label
-            htmlFor="email"
-            style={{ display: "block", marginBottom: "5px" }}
-          >
-            Email:
-          </label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{
-              width: "100%",
-              padding: "8px",
-              fontSize: "16px",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-            }}
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="password"
-            style={{ display: "block", marginBottom: "5px" }}
-          >
-            Password:
-          </label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{
-              width: "100%",
-              padding: "8px",
-              fontSize: "16px",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-            }}
-          />
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className={`w-full py-2 px-4 text-white bg-blue-600 rounded cursor-pointer hover:bg-blue-700 ${
-            loading ? "opacity-60 cursor-not-allowed" : ""
-          }`}
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
-    </div>
+        {loading ? "Logging in..." : "Login"}
+      </button>
+    </form>
   );
 }

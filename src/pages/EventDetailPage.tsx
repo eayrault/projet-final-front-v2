@@ -65,76 +65,107 @@ function EventDetailPage() {
     }
   };
 
-  if (loading) return <p className="p-8 text-center">Loading event...</p>;
-  if (error && !event) return <p className="p-8 text-center text-red-400">Error: {error}</p>;
-  if (!event) return <p className="p-8 text-center">Event not found.</p>;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#1a1a1a] flex items-center justify-center">
+        <p className="text-[#888]">Loading event...</p>
+      </div>
+    );
+  }
+
+  if (error && !event) {
+    return (
+      <div className="min-h-screen bg-[#1a1a1a] flex items-center justify-center">
+        <p className="text-red-400">Error: {error}</p>
+      </div>
+    );
+  }
+
+  if (!event) {
+    return (
+      <div className="min-h-screen bg-[#1a1a1a] flex items-center justify-center">
+        <p className="text-[#888]">Event not found.</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-8">
-      <Link
-        to="/events"
-        className="text-[#646cff] hover:text-[#535bf2] text-sm"
-      >
-        ← Back to events
-      </Link>
+    <div className="min-h-screen bg-[#1a1a1a]">
+      <header className="bg-[#2d2d2d] px-8 py-4 shadow-md flex justify-between items-center">
+        <h1 className="m-0 text-[#646cff] text-2xl">LOCKED</h1>
+        <Link
+          to="/events"
+          className="py-2 px-4 text-sm bg-[#3d3d3d] text-white! rounded hover:bg-[#4d4d4d] transition-colors"
+        >
+          ← Back to events
+        </Link>
+      </header>
 
-      <div className="mt-6 border border-[#444] rounded-xl p-6">
-        <h1 className="text-3xl font-bold mt-0 mb-4">{event.name}</h1>
+      <main className="max-w-2xl mx-auto px-8 py-12">
+        <div className="border border-[#444] rounded-xl p-6">
+          <h2 className="text-3xl font-bold m-0 mb-4 text-white">
+            {event.name}
+          </h2>
 
-        {event.description && (
-          <p className="text-[#aaa] mb-4">{event.description}</p>
-        )}
+          {event.description && (
+            <p className="text-[#aaa] mb-6">{event.description}</p>
+          )}
 
-        <div className="w-full mb-6 text-sm">
-          <div className="flex py-2 border-b border-[#333]">
-            <span className="text-[#888] w-36">Start date</span>
-            <span>{new Date(event.start_date).toLocaleString()}</span>
+          <div className="w-full mb-6 text-sm">
+            <div className="flex py-2 border-b border-[#333]">
+              <span className="text-[#888] w-36">Start date</span>
+              <span className="text-white">
+                {new Date(event.start_date).toLocaleString()}
+              </span>
+            </div>
+            <div className="flex py-2 border-b border-[#333]">
+              <span className="text-[#888] w-36">End date</span>
+              <span className="text-white">
+                {new Date(event.end_date).toLocaleString()}
+              </span>
+            </div>
+            <div className="flex py-2">
+              <span className="text-[#888] w-36">Participants</span>
+              <span className="text-white">{event.attendees}</span>
+            </div>
           </div>
-          <div className="flex py-2 border-b border-[#333]">
-            <span className="text-[#888] w-36">End date</span>
-            <span>{new Date(event.end_date).toLocaleString()}</span>
-          </div>
-          <div className="flex py-2">
-            <span className="text-[#888] w-36">Participants</span>
-            <span>{event.attendees}</span>
-          </div>
-        </div>
 
-        <div>
-          <Link
-            to="/tournaments"
-            className="text-[#646cff] hover:text-[#535bf2] text-sm"
-          >
-            View tournaments
-          </Link>
-        </div>
-
-        {message && <p className="text-green-400 mb-3">{message}</p>}
-        {error && <p className="text-red-400 mb-3">{error}</p>}
-
-        {isRegistered ? (
-          <div>
-            <p className="text-green-400 mb-3">
-              ✓ You are registered for this event
-            </p>
-            <button
-              onClick={handleUnregister}
-              disabled={actionLoading}
-              className="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          <div className="mb-6">
+            <Link
+              to="/tournaments"
+              className="text-[#646cff] hover:text-[#535bf2] text-sm"
             >
-              {actionLoading ? "Processing..." : "Unregister"}
-            </button>
+              View tournaments →
+            </Link>
           </div>
-        ) : (
-          <button
-            onClick={handleRegister}
-            disabled={actionLoading}
-            className="px-5 py-2 bg-[#646cff] text-white rounded-lg hover:bg-[#535bf2] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            {actionLoading ? "Processing..." : "Register for this event"}
-          </button>
-        )}
-      </div>
+
+          {message && <p className="text-green-400 mb-3">{message}</p>}
+          {error && <p className="text-red-400 mb-3">{error}</p>}
+
+          {isRegistered ? (
+            <div>
+              <p className="text-green-400 mb-3">
+                ✓ You are registered for this event
+              </p>
+              <button
+                onClick={handleUnregister}
+                disabled={actionLoading}
+                className="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {actionLoading ? "Processing..." : "Unregister"}
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={handleRegister}
+              disabled={actionLoading}
+              className="px-5 py-2 bg-[#646cff] text-white rounded-lg hover:bg-[#535bf2] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {actionLoading ? "Processing..." : "Register for this event"}
+            </button>
+          )}
+        </div>
+      </main>
     </div>
   );
 }

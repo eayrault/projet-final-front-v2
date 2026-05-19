@@ -23,7 +23,7 @@ export default function Register() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setSuccess(false);
     setLoading(true);
 
@@ -31,58 +31,60 @@ export default function Register() {
       await register(formData);
       setSuccess(true);
       setFormData({
-        username: '',
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
+        username: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Registration failed');
+      setError(err instanceof Error ? err.message : "Registration failed");
     } finally {
       setLoading(false);
     }
   };
-
   const inputClass =
-    "w-full px-3 py-2 text-base rounded border border-gray-400 bg-zinc-800 text-white focus:outline-none focus:border-indigo-500";
-  const labelClass = "block mb-1 text-sm text-gray-300";
+    "bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-[#555] focus:outline-none focus:border-[#646cff] transition-colors";
+  const labelClass = "text-sm text-[#aaa] font-medium";
 
   return (
-    <div className="max-w-md mx-auto px-5 py-6">
-      <h2 className="text-2xl font-bold text-white mb-6">Register</h2>
-
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {error && (
-          <div className="text-red-400 px-4 py-2 bg-red-950 border border-red-500 rounded">
-            {error}
-          </div>
-        )}
-
-        {success && (
-          <div className="text-green-400 px-4 py-2 bg-green-950 border border-green-500 rounded">
-            Registration successful! You can now login.
-          </div>
-        )}
-
-        <div>
-          <label htmlFor="username" className={labelClass}>
-            Username:
-          </label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            className={inputClass}
-          />
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      {error && (
+        <div className="bg-red-900/40 border border-red-500 text-red-300 rounded-lg px-4 py-3 text-sm">
+          {error}
         </div>
+      )}
 
-        <div>
+      {success && (
+        <div className="bg-green-900/40 border border-green-500 text-green-300 rounded-lg px-4 py-3 text-sm">
+          Registration successful! You can now{" "}
+          <a href="/login" className="underline">
+            login
+          </a>
+          .
+        </div>
+      )}
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="username" className={labelClass}>
+          Username
+        </label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          value={formData.username}
+          onChange={handleChange}
+          required
+          placeholder="gamertag"
+          className={inputClass}
+        />
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="flex flex-col gap-2">
           <label htmlFor="first_name" className={labelClass}>
-            First Name:
+            First name
           </label>
           <input
             id="first_name"
@@ -91,13 +93,13 @@ export default function Register() {
             value={formData.first_name}
             onChange={handleChange}
             required
+            placeholder="John"
             className={inputClass}
           />
         </div>
-
-        <div>
+        <div className="flex flex-col gap-2">
           <label htmlFor="last_name" className={labelClass}>
-            Last Name:
+            Last name
           </label>
           <input
             id="last_name"
@@ -106,50 +108,51 @@ export default function Register() {
             value={formData.last_name}
             onChange={handleChange}
             required
+            placeholder="Doe"
             className={inputClass}
           />
         </div>
+      </div>
 
-        <div>
-          <label htmlFor="email" className={labelClass}>
-            Email:
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className={inputClass}
-          />
-        </div>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="email" className={labelClass}>
+          Email
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          placeholder="you@example.com"
+          className={inputClass}
+        />
+      </div>
 
-        <div>
-          <label htmlFor="password" className={labelClass}>
-            Password:
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            className={inputClass}
-          />
-        </div>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="password" className={labelClass}>
+          Password
+        </label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          placeholder="••••••••"
+          className={inputClass}
+        />
+      </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className={`w-full py-2 px-4 text-white bg-green-600 rounded hover:bg-green-700 transition-colors ${
-            loading ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
-          }`}
-        >
-          {loading ? "Registering..." : "Register"}
-        </button>
-      </form>
-    </div>
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full py-3 px-4 bg-[#646cff] text-white font-semibold rounded-lg hover:bg-[#535bf2] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {loading ? "Registering..." : "Create account"}
+      </button>
+    </form>
   );
 }

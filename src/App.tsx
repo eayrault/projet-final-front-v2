@@ -10,6 +10,7 @@ import TournamentPage from "./pages/TournamentPage";
 import MyEventsPage from "./pages/MyEventsPage";
 import ProfilePage from "./pages/ProfilePage";
 import CreateEventPage from "./pages/CreateEventPage";
+import MyCreatedEventsPage from "./pages/MyCreatedEventsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -72,6 +73,14 @@ function App() {
         element={
           <ProtectedRoute>
             <TournamentPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/my-created-events"
+        element={
+          <ProtectedRoute>
+            <MyCreatedEventsPage />
           </ProtectedRoute>
         }
       />

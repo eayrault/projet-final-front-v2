@@ -50,7 +50,7 @@ function CreateEventPage() {
         <h1 className="m-0 text-[#646cff] text-2xl">LOCKED</h1>
         <Link
           to="/"
-          className="py-2 px-4 text-sm bg-[#3d3d3d] text-white rounded hover:bg-[#4d4d4d] transition-colors"
+          className="py-2 px-4 text-sm bg-[#3d3d3d] text-white! rounded hover:bg-[#4d4d4d] transition-colors"
         >
           ← Back to home
         </Link>
@@ -59,7 +59,7 @@ function CreateEventPage() {
       <main className="max-w-xl mx-auto px-8 py-12">
         <h2 className="text-3xl mb-2 text-center">Create an Event</h2>
         <p className="text-[#888] text-center mb-10">
-          Fill in the details below to create a new gaming event.
+          Fill in the details below to create a new event.
         </p>
 
         {success ? (
@@ -132,7 +132,8 @@ function CreateEventPage() {
                   type="datetime-local"
                   required
                   value={form.start_date}
-                  onChange={handleChange}                  className="bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#646cff] transition-colors scheme-dark"
+                  onChange={handleChange}
+                  className="bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#646cff] transition-colors scheme-dark"
                 />
               </div>
 

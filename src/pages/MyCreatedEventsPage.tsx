@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getEvents, type EventResponse } from "../services/api";
+import { getMyCreatedEvents, type EventResponse } from "../services/api";
 
-function EventPage() {
+function MyCreatedEventsPage() {
   const [events, setEvents] = useState<EventResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    getEvents()
+    getMyCreatedEvents()
       .then(setEvents)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
@@ -17,15 +17,7 @@ function EventPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#1a1a1a] flex items-center justify-center">
-        <p className="text-[#888]">Loading events...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-[#1a1a1a] flex items-center justify-center">
-        <p className="text-red-400">Error: {error}</p>
+        <p className="text-[#888]">Loading your events...</p>
       </div>
     );
   }
@@ -43,11 +35,32 @@ function EventPage() {
       </header>
 
       <main className="max-w-3xl mx-auto px-8 py-12">
-        <h2 className="text-3xl font-bold m-0 mb-8">Events</h2>
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold m-0">My Created Events</h2>          <Link
+            to="/events/create"
+            className="py-2 px-4 text-sm bg-[#646cff] text-white! rounded hover:bg-[#535bf2] transition-colors"
+          >
+            + Create new event
+          </Link>
+        </div>
+
+        {error && (
+          <div className="bg-red-900/40 border border-red-500 text-red-300 rounded-lg px-4 py-3 text-sm mb-6">
+            {error}
+          </div>
+        )}
 
         {events.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-[#888] text-lg">No events available yet.</p>
+            <p className="text-[#888] mb-4 text-lg">
+              You haven't created any events yet.
+            </p>
+            <Link
+              to="/events/create"
+              className="text-[#646cff] hover:text-[#535bf2] transition-colors"
+            >
+              Create your first event →
+            </Link>
           </div>
         ) : (
           <ul className="list-none p-0 flex flex-col gap-4">
@@ -69,20 +82,19 @@ function EventPage() {
                       )}
                       <div className="flex gap-6 text-xs text-[#666]">
                         <span>
-                          {new Date(event.start_date).toLocaleDateString(
-                            "en-GB",
-                            { day: "2-digit", month: "short", year: "numeric" }
-                          )}
+                          {new Date(event.start_date).toLocaleDateString("en-GB", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          })}
                           {" → "}
-                          {new Date(event.end_date).toLocaleDateString(
-                            "en-GB",
-                            { day: "2-digit", month: "short", year: "numeric" }
-                          )}
+                          {new Date(event.end_date).toLocaleDateString("en-GB", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          })}
                         </span>
-                        <span>
-                          {event.attendees} participant
-                          {event.attendees !== 1 ? "s" : ""}
-                        </span>
+                        <span>{event.attendees} participant{event.attendees !== 1 ? "s" : ""}</span>
                       </div>
                     </div>
                     <span className="text-[#646cff] text-sm self-center shrink-0">
@@ -99,4 +111,4 @@ function EventPage() {
   );
 }
 
-export default EventPage;
+export default MyCreatedEventsPage;
