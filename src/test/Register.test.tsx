@@ -37,7 +37,6 @@ describe('Composant Register', () => {
   })
 
   it("affiche un état de chargement pendant la soumission", async () => {
-    // register ne se résout jamais → le composant reste en chargement
     mockRegister.mockReturnValue(new Promise(() => {}))
     render(<Register />)
 

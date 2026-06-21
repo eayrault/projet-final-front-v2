@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test.describe("Authentification", () => {
-  test("US1 — un joueur peut créer un compte", async ({ page }) => {
+  test("un joueur peut créer un compte", async ({ page }) => {
     const unique = Date.now()
 
     await page.goto('/register')
@@ -20,7 +20,6 @@ test.describe("Authentification", () => {
     await page.getByLabel(/password/i).fill('motdepasse')
     await page.getByRole('button', { name: /login/i }).click()
 
-    // Redirection vers la page d'accueil après connexion
     await expect(page).toHaveURL('/', { timeout: 5000 })
   })
 
