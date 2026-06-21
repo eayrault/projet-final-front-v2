@@ -10,8 +10,6 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',
   },
-  // Le frontend doit être démarré avec `npm run dev` avant de lancer les tests E2E.
-  // Le backend doit être démarré séparément via Docker.
   webServer: {
     command: 'npm run dev',
     url: 'http://localhost:5173',

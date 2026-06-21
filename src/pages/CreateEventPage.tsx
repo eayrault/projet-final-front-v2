@@ -45,12 +45,12 @@ function CreateEventPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a]">
-      <header className="bg-[#2d2d2d] px-8 py-4 shadow-md flex justify-between items-center">
-        <h1 className="m-0 text-[#646cff] text-2xl">LOCKED</h1>
+    <div className="min-h-screen bg-[#1D1B26]">
+      <header className="bg-[#272535] px-8 py-4 shadow-md flex justify-between items-center">
+        <h1 className="m-0 text-[#DDC01C] text-2xl">LOCKED</h1>
         <Link
           to="/"
-          className="py-2 px-4 text-sm bg-[#3d3d3d] text-white! rounded hover:bg-[#4d4d4d] transition-colors"
+          className="py-2 px-4 text-sm bg-[#302E42] text-[#FFF8E7]! rounded hover:bg-[#403D56] transition-colors"
         >
           ← Back to home
         </Link>
@@ -58,7 +58,7 @@ function CreateEventPage() {
 
       <main className="max-w-xl mx-auto px-8 py-12">
         <h2 className="text-3xl mb-2 text-center">Create an Event</h2>
-        <p className="text-[#888] text-center mb-10">
+        <p className="text-[#9B9080] text-center mb-10">
           Fill in the details below to create a new event.
         </p>
 
@@ -68,14 +68,14 @@ function CreateEventPage() {
             <p className="text-green-400 text-lg font-semibold mb-1">
               Event created successfully!
             </p>
-            <p className="text-[#888] text-sm">
+            <p className="text-[#9B9080] text-sm">
               Redirecting to the event page...
             </p>
           </div>
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="bg-[#2d2d2d] rounded-xl p-8 flex flex-col gap-6 shadow-lg"
+            className="bg-[#272535] rounded-xl p-8 flex flex-col gap-6 shadow-lg"
           >
             {error && (
               <div className="bg-red-900/40 border border-red-500 text-red-300 rounded-lg px-4 py-3 text-sm">
@@ -84,7 +84,10 @@ function CreateEventPage() {
             )}
 
             <div className="flex flex-col gap-2">
-              <label className="text-sm text-[#aaa] font-medium" htmlFor="name">
+              <label
+                className="text-sm text-[#9B9080] font-medium"
+                htmlFor="name"
+              >
                 Event name <span className="text-red-400">*</span>
               </label>
               <input
@@ -95,13 +98,13 @@ function CreateEventPage() {
                 value={form.name}
                 onChange={handleChange}
                 placeholder="e.g. Evo France 2027"
-                className="bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-[#555] focus:outline-none focus:border-[#646cff] transition-colors"
+                className="bg-[#1D1B26] border border-[#444] rounded-lg px-4 py-3 text-[#FFF8E7] placeholder-[#555] focus:outline-none focus:border-[#2B0071] transition-colors"
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <label
-                className="text-sm text-[#aaa] font-medium"
+                className="text-sm text-[#9B9080] font-medium"
                 htmlFor="description"
               >
                 Description{" "}
@@ -114,14 +117,14 @@ function CreateEventPage() {
                 value={form.description}
                 onChange={handleChange}
                 placeholder="Describe the event..."
-                className="bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-[#555] focus:outline-none focus:border-[#646cff] transition-colors resize-none"
+                className="bg-[#1D1B26] border border-[#444] rounded-lg px-4 py-3 text-[#FFF8E7] placeholder-[#555] focus:outline-none focus:border-[#2B0071] transition-colors resize-none"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-2">
                 <label
-                  className="text-sm text-[#aaa] font-medium"
+                  className="text-sm text-[#9B9080] font-medium"
                   htmlFor="start_date"
                 >
                   Start date <span className="text-red-400">*</span>
@@ -133,13 +136,13 @@ function CreateEventPage() {
                   required
                   value={form.start_date}
                   onChange={handleChange}
-                  className="bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#646cff] transition-colors scheme-dark"
+                  className="bg-[#1D1B26] border border-[#444] rounded-lg px-4 py-3 text-[#FFF8E7] focus:outline-none focus:border-[#2B0071] transition-colors scheme-dark"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
                 <label
-                  className="text-sm text-[#aaa] font-medium"
+                  className="text-sm text-[#9B9080] font-medium"
                   htmlFor="end_date"
                 >
                   End date <span className="text-red-400">*</span>
@@ -151,7 +154,7 @@ function CreateEventPage() {
                   required
                   value={form.end_date}
                   onChange={handleChange}
-                  className="bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#646cff] transition-colors scheme-dark"
+                  className="bg-[#1D1B26] border border-[#444] rounded-lg px-4 py-3 text-[#FFF8E7] focus:outline-none focus:border-[#2B0071] transition-colors scheme-dark"
                 />
               </div>
             </div>
@@ -159,7 +162,7 @@ function CreateEventPage() {
             <button
               type="submit"
               disabled={loading}
-              className="mt-2 py-3 px-6 bg-[#646cff] text-white font-semibold rounded-lg hover:bg-[#535bf2] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="mt-2 py-3 px-6 bg-[#2B0071] text-[#FFF8E7] font-semibold rounded-lg hover:bg-[#3D0099] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? "Creating..." : "Create Event"}
             </button>

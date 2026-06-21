@@ -10,8 +10,8 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#1a1a1a] flex items-center justify-center">
-        <p className="text-[#888]">Loading...</p>
+      <div className="min-h-screen bg-[#1D1B26] flex items-center justify-center">
+        <p className="text-[#9B9080]">Loading...</p>
       </div>
     );
   }

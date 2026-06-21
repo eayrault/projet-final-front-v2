@@ -44,8 +44,8 @@ export default function Register() {
     }
   };
   const inputClass =
-    "bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-[#555] focus:outline-none focus:border-[#646cff] transition-colors";
-  const labelClass = "text-sm text-[#aaa] font-medium";
+    "bg-[#1D1B26] border border-[#444] rounded-lg px-4 py-3 text-[#FFF8E7] placeholder-[#555] focus:outline-none focus:border-[#2B0071] transition-colors";
+  const labelClass = "text-sm text-[#9B9080] font-medium";
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -149,7 +149,7 @@ export default function Register() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3 px-4 bg-[#646cff] text-white font-semibold rounded-lg hover:bg-[#535bf2] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full py-3 px-4 bg-[#2B0071] text-[#FFF8E7] font-semibold rounded-lg hover:bg-[#3D0099] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {loading ? "Registering..." : "Create account"}
       </button>

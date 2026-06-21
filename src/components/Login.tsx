@@ -30,7 +30,7 @@ export default function Login() {
       )}
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="text-sm text-[#aaa] font-medium">
+        <label htmlFor="email" className="text-sm text-[#9B9080] font-medium">
           Email
         </label>
         <input
@@ -40,12 +40,15 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
           required
           placeholder="you@example.com"
-          className="bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-[#555] focus:outline-none focus:border-[#646cff] transition-colors"
+          className="bg-[#1D1B26] border border-[#444] rounded-lg px-4 py-3 text-[#FFF8E7] placeholder-[#555] focus:outline-none focus:border-[#2B0071] transition-colors"
         />
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="password" className="text-sm text-[#aaa] font-medium">
+        <label
+          htmlFor="password"
+          className="text-sm text-[#9B9080] font-medium"
+        >
           Password
         </label>
         <input
@@ -55,14 +58,14 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
           placeholder="••••••••"
-          className="bg-[#1a1a1a] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-[#555] focus:outline-none focus:border-[#646cff] transition-colors"
+          className="bg-[#1D1B26] border border-[#444] rounded-lg px-4 py-3 text-[#FFF8E7] placeholder-[#555] focus:outline-none focus:border-[#2B0071] transition-colors"
         />
       </div>
 
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3 px-4 bg-[#646cff] text-white font-semibold rounded-lg hover:bg-[#535bf2] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full py-3 px-4 bg-[#2B0071] text-[#FFF8E7] font-semibold rounded-lg hover:bg-[#3D0099] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {loading ? "Logging in..." : "Login"}
       </button>

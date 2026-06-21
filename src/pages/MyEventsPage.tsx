@@ -31,19 +31,19 @@ function MyEventsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#1a1a1a] flex items-center justify-center">
-        <p className="text-[#888]">Loading your events...</p>
+      <div className="min-h-screen bg-[#1D1B26] flex items-center justify-center">
+        <p className="text-[#9B9080]">Loading your events...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a]">
-      <header className="bg-[#2d2d2d] px-8 py-4 shadow-md flex justify-between items-center">
-        <h1 className="m-0 text-[#646cff] text-2xl">LOCKED</h1>
+    <div className="min-h-screen bg-[#1D1B26]">
+      <header className="bg-[#272535] px-8 py-4 shadow-md flex justify-between items-center">
+        <h1 className="m-0 text-[#DDC01C] text-2xl">LOCKED</h1>
         <Link
           to="/"
-          className="py-2 px-4 text-sm bg-[#3d3d3d] text-white! rounded hover:bg-[#4d4d4d] transition-colors"
+          className="py-2 px-4 text-sm bg-[#302E42] text-[#FFF8E7]! rounded hover:bg-[#403D56] transition-colors"
         >
           ← Back to home
         </Link>
@@ -56,10 +56,10 @@ function MyEventsPage() {
 
         {registrations.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-[#888] text-lg mb-4">
+            <p className="text-[#9B9080] text-lg mb-4">
               You are not registered to any event yet.
             </p>
-            <Link to="/events" className="text-[#646cff] hover:text-[#535bf2]">
+            <Link to="/events" className="text-[#DDC01C] hover:text-[#B89E18]">
               Browse available events →
             </Link>
           </div>
@@ -68,15 +68,15 @@ function MyEventsPage() {
             {registrations.map((reg) => (
               <li
                 key={reg.id}
-                className="border border-[#444] rounded-xl p-5 hover:border-[#646cff] transition-colors"
+                className="border border-[#444] rounded-xl p-5 hover:border-[#2B0071] transition-colors"
               >
                 <div className="flex justify-between items-start gap-4">
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold m-0 mb-1 text-white">
+                    <h3 className="text-xl font-semibold m-0 mb-1 text-[#FFF8E7]">
                       {reg.event_name}
                     </h3>
                     {reg.event_description && (
-                      <p className="text-[#888] text-sm m-0 mb-2">
+                      <p className="text-[#9B9080] text-sm m-0 mb-2">
                         {reg.event_description}
                       </p>
                     )}
@@ -92,14 +92,14 @@ function MyEventsPage() {
                   <div className="flex flex-col gap-2 items-end shrink-0">
                     <Link
                       to={`/events/${reg.event_id}`}
-                      className="text-[#646cff] hover:text-[#535bf2] text-sm whitespace-nowrap"
+                      className="text-[#DDC01C] hover:text-[#B89E18] text-sm whitespace-nowrap"
                     >
                       View details →
                     </Link>
                     <button
                       onClick={() => handleUnregister(reg.event_id)}
                       disabled={actionLoading === reg.event_id}
-                      className="px-3 py-1.5 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="px-3 py-1.5 bg-red-600 text-[#FFF8E7] text-sm rounded-lg hover:bg-red-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {actionLoading === reg.event_id
                         ? "Processing..."
